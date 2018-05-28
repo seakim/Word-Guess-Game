@@ -16,21 +16,36 @@
 
     <body>
         <div class="container">
-            
+
             <div class="hangman">
-                <h2>HANGMAN</h2><br>
+                <h2>HANGMAN</h2>
+                <br>
                 <p>PRESS ANY KEY TO GET STARTED!</p>
                 <label for="wins">Wins: </label>
-                <div id="wins"></div><br><br>
+                <div id="wins"></div>
+                <br>
+                <br>
 
                 <label for="word">CURRENT WORD</label>
-                <div id="word"></div><br>
+                <div id="word"></div>
+                <br>
                 <label for="count">NUMBER OF GUESSES REMAINING</label>
-                <div id="count"></div><br>
+                <div id="count"></div>
+                <br>
                 <label for="guessed">LETTERS ALREADY GUESSED</label>
                 <div id="guessed"></div>
             </div>
         </div>
+        <!-- audio lists -->
+        <audio id="JasonMraz">
+            <source src="assets/songs/JasonMraz.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+        </audio>
+        <audio id="MichaelBuble">
+            <source src="assets/songs/MichaelBuble.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+        </audio>
+        <audio id="Beatles">
+            <source src="assets/songs/Beatles.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+        </audio>
 
         <script src="assets/javascript/game.js"></script>
     </body>

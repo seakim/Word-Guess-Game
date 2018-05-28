@@ -1,113 +1,81 @@
 // RCB-HW3-PART1
 
-var singers, singer, guessedWord;
+var singers, singer, guessedWord, count, winTemp, tempKey;
 var wins, guessed, totalGuessLeft;
 
-singers = ['Madonna', 'Beatles', 'Bruno Mars', 'Justin Timberlake', 'Michael Jackson', 'Eminem', 'Sam Smith', 'Adele'];
-guessedWord = [];
+singers = ['JasonMraz',"MichaelBuble","Beatles"];
+winTemp = 0;
 
 wins = document.getElementById('wins');
 guessed = document.getElementById('guessed');
 totalGuessLeft = document.getElementById('count');
 word = document.getElementById('word');
 
-
 function init() {
-
+    count = 5;
+    guessedWord = [];
+    guessedKey = [];
+    tempKey = -1;
     singer = singers[Math.floor(Math.random() * singers.length)].split('');
+
+    // show me the answer;
+    console.log(singer);
+
     for (var i = 0; i < singer.length; i++) {
         guessedWord.push('_');
     }
-
-    wins.textContent = 0;
-    totalGuessLeft.textContent = 10;
-    word.textContent = guessedWord;
+    wins.textContent = winTemp;
+    totalGuessLeft.textContent = count;
+    word.textContent = guessedWord.join(" ");
+    guessed.textContent = guessedKey;
 }
 
-
+// init()
 init();
-console.log(singer);
 
+document.body.addEventListener('keyup', function (event) {
 
-document.body.addEventListener('keyup', function(event) {
+    tempKey = -1;
 
-    for (var i = 0; i < singer.length; i++) {
-        if (event.key === singer[i]) {
-            guessedWord[i] = event.key;
+    if (guessedKey.includes(event.key.toUpperCase())) {
+        alert(event.key.toUpperCase() + " is already guessed.")
+    } else {
+        for (var i = 0; i < singer.length; i++) {
+            if (event.key === singer[i].toLowerCase()) {
+
+                // if guessed key is right, add the key to temp;
+                guessedWord[i] = singer[i];
+                word.textContent = guessedWord.join(" ");
+                tempKey = event.key;
+            }
+        }
+
+        // count --, only if the guess is wrong, and push the temp key to guessed;
+        if (tempKey === -1) {
+            count -= 1;
+            totalGuessLeft.textContent = count;
+            guessedKey.push(event.key.toUpperCase());
+
+        // if temp hold the key, push to guessed;
+        } else {
+            guessedKey.push(tempKey.toUpperCase());
+        }
+        guessed.textContent = guessedKey.join(" ");
+
+        // if count === 0, new game, else if all keys are guessed, win ++, new game;
+        if (count === 0) {
+            alert("you lost! The answer was " + singer);
+            init();
+        } else if (!guessedWord.includes('_')) {
+            winTemp += 1;
+            wins.textContent = winTemp;
+
+            singer.join("")
+            var song = document.getElementById(singer.join("")); 
+            song.play();
+            alert("Congrats! Another game?");
+            song.pause();
+            init();
         }
     }
 });
-
-
-
-//             if (guessedArray.indexOf(event.key) === -1) {
-//                 guessedArray.push(event.key);
-                // guessed.textContent = guessedArray;
-//                 totalGuessLeftTemp -= 1;
-//                 totalGuessLeft.textContent = totalGuessLeftTemp;
-//             }
-//         }
-
-
-// console.log(guessedWord);
-
-
-
-
-
-
-
-
-
-
-// guessedArray = [];
-// winsTemp = 0;
-// lossesTemp = 0;
-// totalGuessLeftTemp = 10;
-
-
-
-// console.log("the answer is: "+rand);
-// init();
-
-// document.body.addEventListener('keyup', function(event) {
-
-//     // if win, win++;
-//     if (event.key === rand) {
-//         winsTemp += 1;
-//         wins.textContent = winsTemp;
-//         reset(); 
-//     } else {
-
-//         // if totalGuessLeft === 0, losses++;
-//         if (totalGuessLeftTemp === 1) {
-//             lossesTemp += 1;
-//             losses.textContent = lossesTemp;
-//             reset();
-//         } else {
-
-//             // if no duplicate, push to array, totalGuessLeft--;
-
-
-//             if (guessedArray.indexOf(event.key) === -1) {
-//                 guessedArray.push(event.key);
-                // guessed.textContent = guessedArray;
-//                 totalGuessLeftTemp -= 1;
-//                 totalGuessLeft.textContent = totalGuessLeftTemp;
-//             }
-//         }
-//     }
-// });
-
-
-// function init() {
-//     wins.textContent = winsTemp;
-//     losses.textContent = lossesTemp;
-//     totalGuessLeft.textContent = totalGuessLeftTemp;
-// }
-// function reset () {
-//     totalGuessLeftTemp = 10;
-//     totalGuessLeft.textContent = totalGuessLeftTemp;
-//     guessedArray = [];
-//     guessed.textContent = guessedArray;
-// }
